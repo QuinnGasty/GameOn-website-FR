@@ -12,7 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalBtnClose = document.querySelector(".close");
-const form = document.querySelector('#subscriptionform')
+const form = document.querySelector('#subscriptionform');
 
 // RegEx
 const regExEmail = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$','g');
@@ -98,7 +98,7 @@ const validtext = function(inputid, info) {
       info.classList.remove('error');
       valid = true;
     } else {
-      msg = 'Date non valide';
+      msg = 'Veuillez entrer une date de naissance valide';
       info.classList.remove('no-error');
       info.classList.add('error');
     }
@@ -132,7 +132,23 @@ const validtext = function(inputid, info) {
     validNumber(quantity, infonumber);
   })
 
-  // 
+  // location validation
+  
+  // CGU validation
+  const validCGU = function(checkedCGU, info) {
+    let msg;
+    let valid = false;
+    if (!checkbox1.checked) {
+      msg = 'Merci d\'accepter les conditions générales d\'utilisation';
+      info.classList.add('error');
+    } 
+    info.textContent = msg;
+    return valid;
+  }
+
+  form.checkbox1.addEventListener("change", () => {
+    validCGU(checkbox1, infocgu);
+  })
 
   //function addition(a,b) {
     //console.log(`${a} + ${b} = ${a+b}`);
