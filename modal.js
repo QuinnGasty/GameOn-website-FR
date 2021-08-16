@@ -12,6 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalBtnClose = document.querySelector(".close");
+const modalSubmitClose = document.querySelector("#btn-submit-close");
 const form = document.querySelector('#subscriptionform');
 
 // RegEx
@@ -31,6 +32,10 @@ function launchModal() {
 
 // close modal form
 modalBtnClose.addEventListener ("click", () => {
+  modalbg.style.display = "none";
+})
+
+modalSubmitClose.addEventListener("click", () => {
   modalbg.style.display = "none";
 })
 
@@ -144,7 +149,6 @@ const validtext = function(inputid, info) {
       msg = '';
       valid = true;
       info.textContent = "";
-      console.log('bonjour')
     } else {
       msg = "Veuillez sélectionner une ville";
       info.classList.add('error');
@@ -192,7 +196,6 @@ const validtext = function(inputid, info) {
       document.querySelector(".modal-success").style.display = "block";
       resetForm();
     }
-    console.log(validPrenom && validNom && validMail && validBirthdate && validParticipations && validCity && validcgu)
   }
 
   function resetForm() {
