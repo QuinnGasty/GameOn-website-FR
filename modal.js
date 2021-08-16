@@ -25,12 +25,16 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  document.querySelector(".modal-body").style.display = "block";
+  document.querySelector(".modal-success").style.display = "none";
 }
 
 // close modal form
 modalBtnClose.addEventListener ("click", () => {
   modalbg.style.display = "none";
 })
+
+let validPrenom = validNom = validMail = validBirthdate = validParticipations = validCity = validcgu = false;
 
 // name and surname validation
 const validtext = function(inputid, info) {
@@ -59,11 +63,11 @@ const validtext = function(inputid, info) {
 };
 
   form.first.addEventListener("change", () => {
-    validtext(first, infofirst);
+    validPrenom = validtext(first, infofirst);
   });
 
   form.last.addEventListener("change", () => {
-    validtext(last, infolast);
+    validNom = validtext(last, infolast);
   });
 
   // email validation
@@ -85,7 +89,7 @@ const validtext = function(inputid, info) {
   };
 
   form.email.addEventListener("change", () => {
-    validEmail(email, infoemail);
+    validMail = validEmail(email, infoemail);
   });
 
   // birthdate validation
@@ -107,7 +111,7 @@ const validtext = function(inputid, info) {
   }
 
   form.birthdate.addEventListener("change", () => {
-    validDate(birthdate, infodate);
+    validBirthdate = validDate(birthdate, infodate);
   })
 
   //  number of tournaments validation
@@ -129,28 +133,72 @@ const validtext = function(inputid, info) {
   }
 
   form.quantity.addEventListener("change", () => {
-    validNumber(quantity, infonumber);
+    validParticipations = validNumber(quantity, infonumber);
   })
 
   // location validation
-  
+  const validLocation = function(info) {
+    let msg = "";
+    let valid = false;
+    if ((location1.checked||location2.checked||location3.checked||location4.checked||location5.checked||location6.checked)) {
+      msg = '';
+      valid = true;
+      info.textContent = "";
+      console.log('bonjour')
+    } else {
+      msg = "Veuillez sélectionner une ville";
+      info.classList.add('error');
+    }
+    info.textContent = msg;
+    return valid;
+  }
+
+  const locations = [location1, location2, location3, location4, location5, location6];
+  locations.forEach(location => {
+    location.addEventListener('click', () => {
+      validCity = validLocation('infolocation');
+      infolocation.textContent = "";
+    })
+  })
+
   // CGU validation
-  const validCGU = function(checkedCGU, info) {
+  const validCGU = function(checkbox1, info) {
     let msg;
     let valid = false;
     if (!checkbox1.checked) {
       msg = 'Merci d\'accepter les conditions générales d\'utilisation';
       info.classList.add('error');
-    } 
+    } else {
+      msg = "";
+      valid = true;
+    }
     info.textContent = msg;
     return valid;
   }
 
   form.checkbox1.addEventListener("change", () => {
-    validCGU(checkbox1, infocgu);
+    validcgu = validCGU(checkbox1, infocgu);
   })
 
-  //function addition(a,b) {
-    //console.log(`${a} + ${b} = ${a+b}`);
-  //}
-  //addition(12,3)
+  const validate = (event) => {
+    event.preventDefault();
+
+   if(!validCity) {
+     infolocation.textContent = "Veuillez choisir une ville";
+   } 
+
+    if(validPrenom && validNom && validMail && validBirthdate && validParticipations && validCity && validcgu) {
+      document.querySelector(".modal-body").style.display = "none";
+      document.querySelector(".modal-success").style.display = "block";
+      resetForm();
+    }
+    console.log(validPrenom && validNom && validMail && validBirthdate && validParticipations && validCity && validcgu)
+  }
+
+  function resetForm() {
+    form.reset();
+    document.querySelectorAll('small').forEach(s => s.textContent = "");
+    validPrenom = validNom = validMail = validBirthdate = validParticipations = validCity = validcgu = false;
+  }
+
+

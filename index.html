@@ -54,8 +54,9 @@
     <div class="bground">
       <div class="content">
         <span class="close"></span>
+        <div class="modal-success">Merci ! Vos informations ont bien été prises en compte.</div>
         <div class="modal-body">
-          <form name="reserve" id="subscriptionform" action="index.html" method="get" onsubmit="return validate();">
+          <form name="reserve" id="subscriptionform" action="index.html" method="get" onsubmit="return validate(event);">
             <div class="formData">
               <label>Prénom</label><br>
               <input class="text-control" type="text" id="first" name="first" minlength="2" /><br>
@@ -111,7 +112,7 @@
             </div>
 
             <div class="formData">
-              <input class="checkbox-input" type="checkbox" id="checkbox1" checked />
+              <input class="checkbox-input" type="checkbox" id="checkbox1" />
               <label class="checkbox2-label" for="checkbox1" required>
                 <span class="checkbox-icon"></span>
                 J'ai lu et accepté les conditions d'utilisation.
