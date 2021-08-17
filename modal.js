@@ -190,6 +190,30 @@ const validtext = function(inputid, info) {
    if(!validCity) {
      infolocation.textContent = "Veuillez choisir une ville";
    } 
+   
+   if(!validPrenom) {
+     infofirst.textContent = "Veuillez saisir un prénom";
+   } 
+   
+   if(!validNom) {
+     infolast.textContent = "Veuillez saisir un nom";
+   } 
+   
+   if(!validMail) {
+     infoemail.textContent = "Veuillez saisir une adresse email";
+   } 
+   
+   if(!validBirthdate) {
+     infodate.textContent = "Veuillez saisir une date de naissance";
+   } 
+   
+   if(!validParticipations) {
+     infonumber.textContent = "Veuillez renseigner le nombre de participations"
+   } 
+
+   if(!validcgu) {
+     infocgu.textContent = "Veuillez accepter les conditions générales d'utilisation"
+   }
 
     if(validPrenom && validNom && validMail && validBirthdate && validParticipations && validCity && validcgu) {
       document.querySelector(".modal-body").style.display = "none";
