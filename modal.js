@@ -45,7 +45,7 @@ let validPrenom = validNom = validMail = validBirthdate = validParticipations = 
 const validtext = function(inputid, info) {
   let msg;
   let valid = false;
-  if (inputid.value.length < 2) {
+  if (inputid.value.trim().length < 2) {
     msg = 'Le champ doit contenir au moins 2 caractères';
     info.classList.add('error');
     info.classList.remove('no-error');
